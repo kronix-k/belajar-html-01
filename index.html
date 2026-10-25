@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catatan HTML Kuroneko - Bagian 1: Home dan Syntax</title>
+<style>
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#000;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:820px;margin:0 auto;padding:28px 16px 56px}
+h1{font-size:clamp(1.7rem,5vw,2.3rem);line-height:1.15;margin:0 0 8px;letter-spacing:-.02em}
+.lead{color:#555;margin:0 0 28px;max-width:60ch}
+.cat h3{font-size:1rem;margin:22px 0 4px}
+.cat p{margin:0 0 8px;max-width:68ch}
+.cat code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background:#eee;border-radius:3px;padding:0 4px}
+.ex{background:#eee;border:1px solid #000;border-radius:6px;padding:10px 12px;margin:8px 0;overflow-x:auto;font:400 .88rem/1.6 ui-monospace,Menlo,Consolas,monospace}
+.try{margin:4px 6px 0 0;font-size:.88rem}
+.k-warn .badge{background:#fff;color:#000;text-decoration:underline}
+.cat ul,.cat ol{margin:0 0 8px;padding-left:22px;max-width:68ch}
+.cat li{margin:0 0 4px}
+.tbw{overflow-x:auto;border:1px solid #000;border-radius:6px;margin:8px 0 12px}
+.tb{border-collapse:collapse;width:100%;font-size:.9rem;min-width:520px}
+.tb th,.tb td{text-align:left;padding:6px 10px;border-bottom:1px solid #ccc;vertical-align:top}
+.tb thead th{background:#000;color:#fff}
+.tb .grp td{background:#eee;font-weight:700;border-top:1px solid #000}
+h2{font-size:1.1rem;margin:0 0 2px}
+section{margin-bottom:28px}
+.sub{color:#555;font-size:.9rem;margin:0 0 10px}
+.ed{position:relative;height:300px;background:#000;border:1px solid #000;border-radius:6px}
+.ed:focus-within{outline:3px solid #000;outline-offset:2px}
+.ed pre,.ed textarea{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:14px;border:0;border-radius:6px;
+  font:400 15px/1.7 ui-monospace,"SF Mono",Menlo,Consolas,monospace;letter-spacing:0;tab-size:2;white-space:pre;word-wrap:normal}
+.ed pre{overflow:hidden;pointer-events:none;color:#fff}
+.ed textarea{overflow:auto;resize:none;outline:none;background:transparent;color:transparent;-webkit-text-fill-color:transparent;caret-color:#fff;-webkit-appearance:none}
+.ed textarea::selection{background:rgba(255,255,255,.35)}
+.t{pointer-events:auto;color:#bdbdbd}
+.t.x{color:#fff}
+.t.d{color:#777}
+.t.on{background:#fff;color:#000;box-shadow:0 0 0 2px #fff;border-radius:2px}
+#tip{position:fixed;z-index:20;max-width:280px;background:#000;color:#fff;border:1px solid #fff;border-radius:8px;padding:10px 12px;font-size:.9rem;line-height:1.45;box-shadow:0 4px 18px rgba(0,0,0,.35);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.show{opacity:1}
+#tip b{display:block;font:600 .85rem ui-monospace,Menlo,Consolas,monospace;margin-bottom:2px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+.note{color:#555;font-size:.85rem}
+button{font:inherit;font-weight:700;background:#000;color:#fff;border:2px solid #000;border-radius:6px;padding:6px 12px;cursor:pointer}
+button:hover{background:#fff;color:#000}
+button:focus-visible{outline:3px solid #000;outline-offset:2px}
+.browser{border:1px solid #000;border-radius:6px;overflow:hidden}
+.bar{display:flex;align-items:center;gap:6px;background:#eee;border-bottom:1px solid #000;padding:8px 12px;font-size:.85rem}
+.bar i{width:10px;height:10px;border-radius:50%;border:1px solid #000;display:inline-block}
+.bar .tab{background:#fff;border:1px solid #000;border-radius:6px;padding:1px 12px;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:6px}
+iframe{display:block;width:100%;height:220px;border:0;background:#fff}
+.fxh{margin-top:20px}
+ul.fx{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+ul.fx li{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid #000;border-radius:6px;font-size:.92rem}
+.badge{flex:none;font-weight:700;font-size:.75rem;border:1px solid #000;border-radius:4px;padding:0 7px;margin-top:2px;background:#000;color:#fff}
+.k-del .badge{background:#fff;color:#000}
+.k-chg .badge{background:#fff;color:#000;border-style:dashed}
+.k-none .badge{background:#eee;color:#000}
+ul.fx code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;background:#eee;border-radius:3px;padding:0 4px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Catatan HTML Kuroneko</h1>
+  <p class="lead">Catatan belajar HTML dari tahun 2019. Mulai belajar 14 Maret 2019, dicatat 16 Maret 2019. Bagian 1: Home, membahas syntax HTML</p>
+
+  <section id="kode">
+    <h2>Kode</h2>
+    <p class="sub">Arahkan kursor ke bagian kode untuk melihat artinya (di HP, tap). Hanya HTML yang dijalankan.</p>
+    <div class="ed">
+      <pre id="hl" aria-hidden="true"></pre>
+      <textarea id="src" wrap="off" spellcheck="false" aria-label="Editor HTML"></textarea>
+    </div>
+    <div class="row">
+      <span class="note"><code>&lt;script&gt;</code> dan <code>&lt;style&gt;</code> diabaikan.</span>
+      <button id="reset" type="button">Kode awal</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Website</h2>
+    <div class="browser">
+      <div class="bar"><i></i><i></i><i></i><span class="tab" id="tabTitle"></span></div>
+      <iframe id="site" sandbox="" title="Website"></iframe>
+    </div>
+    <h2 class="fxh">Perubahan yang dibuat</h2>
+    <ul class="fx" id="fx" aria-live="polite"></ul>
+  </section>
+
+  <section class="cat">
+    <h2>Catatan: apa itu syntax</h2>
+
+    <h3>Pengertian syntax</h3>
+    <p>Syntax adalah aturan penulisan sebuah bahasa: urutan, tanda baca, dan bentuk yang harus diikuti supaya komputer bisa membaca kodenya. Mirip tata bahasa sehari-hari. Kalimat yang urutannya salah masih bisa ditebak manusia, tetapi komputer butuh aturan yang pasti.</p>
+
+    <h3>Syntax pada HTML</h3>
+    <p>HTML singkatan dari HyperText Markup Language. Markup language artinya bahasa penanda: tugasnya memberi tanda pada teks, misalnya “ini judul”, “ini paragraf”, atau “ini tautan”. HTML bukan bahasa pemrograman karena tidak punya logika seperti perhitungan atau percabangan. Syntax-nya berupa tag yang ditulis di dalam tanda <code>&lt; &gt;</code>.</p>
+
+    <h3>Bagian-bagian syntax HTML</h3>
+    <ul>
+      <li><b>Tag</b>: nama di dalam <code>&lt; &gt;</code>. Tag pembuka <code>&lt;p&gt;</code>, tag penutup <code>&lt;/p&gt;</code>.</li>
+      <li><b>Elemen</b>: tag pembuka, isi, dan tag penutup digabung. Contoh <code>&lt;p&gt;Halo&lt;/p&gt;</code>.</li>
+      <li><b>Isi</b>: teks atau elemen lain di antara tag pembuka dan tag penutup.</li>
+      <li><b>Atribut</b>: pengaturan tambahan di tag pembuka, ditulis <code>nama="nilai"</code>. Contoh <code>&lt;a href="https://contoh.com"&gt;</code>: href nama atributnya, alamatnya nilainya.</li>
+      <li><b>Deklarasi</b>: <code>&lt;!DOCTYPE html&gt;</code> bukan tag biasa, melainkan instruksi agar browser memakai standar HTML5.</li>
+      <li><b>Komentar</b>: <code>&lt;!-- catatan --&gt;</code>. Tidak tampil di halaman dan tidak boleh bersarang.</li>
+      <li><b>Entitas karakter</b>: kode untuk karakter khusus. <code>&amp;lt;</code> untuk tanda <code>&lt;</code>, <code>&amp;gt;</code> untuk <code>&gt;</code>, <code>&amp;amp;</code> untuk <code>&amp;</code>, <code>&amp;quot;</code> untuk tanda kutip, <code>&amp;nbsp;</code> untuk spasi yang tidak terputus, dan <code>&amp;copy;</code> untuk ©.</li>
+    </ul>
+
+    <h3>Aturan syntax HTML</h3>
+    <ol>
+      <li>Tag diawali tanda <code>&lt;</code> dan diakhiri <code>&gt;</code>.</li>
+      <li>Tag penutup memakai garis miring: <code>&lt;/p&gt;</code>.</li>
+      <li>Nama tag dan nama atribut tidak membedakan huruf besar kecil (<code>&lt;P&gt;</code> sama dengan <code>&lt;p&gt;</code>), tetapi tulis dengan huruf kecil. Nilai atribut seperti nama file bisa membedakan huruf besar kecil.</li>
+      <li>Beri tanda kutip pada nilai atribut: <code>href="halaman.html"</code>.</li>
+      <li>Atribut hanya ditulis di tag pembuka, dipisah spasi: <code>&lt;img src="foto.jpg" alt="Foto"&gt;</code>.</li>
+      <li>Satu atribut tidak boleh ditulis dua kali dalam satu tag.</li>
+      <li>Sebagian atribut boleh tanpa nilai, misalnya <code>&lt;input disabled&gt;</code>.</li>
+      <li>Elemen bersarang harus rapi dan tidak boleh bertumpang: <code>&lt;b&gt;&lt;i&gt;teks&lt;/i&gt;&lt;/b&gt;</code>.</li>
+      <li>Spasi dan enter di kode tidak berpengaruh: beberapa spasi atau baris baru ditampilkan sebagai satu spasi. Untuk pindah baris pakai <code>&lt;br&gt;</code>, untuk paragraf pakai <code>&lt;p&gt;</code>.</li>
+      <li>Karakter <code>&lt;</code> dan <code>&amp;</code> yang mau ditampilkan sebagai teks ditulis sebagai entitas.</li>
+    </ol>
+
+    <h3>Syntax error di HTML</h3>
+    <p>Di bahasa pemrograman, syntax yang salah biasanya membuat program berhenti dan menampilkan pesan error. HTML tidak begitu: browser mencoba memperbaikinya sendiri dan tetap menampilkan halaman. Akibatnya tidak ada pesan, tetapi hasilnya bisa berbeda dari maksudmu. Karena itu syntax HTML perlu ditulis dengan teliti. Contohnya ada di catatan kenapa tag harus ditutup di bawah.</p>
+
+    <h3>Struktur dokumen minimal</h3>
+<pre class="ex">&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Judul halaman&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Judul&lt;/h1&gt;
+  &lt;p&gt;Paragraf.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    <p><code>lang="id"</code> memberi tahu bahasa halaman. <code>&lt;meta charset="UTF-8"&gt;</code> menentukan set karakter supaya huruf dan simbol tampil benar.</p>
+    <button class="try" data-s="full" type="button">Coba di editor: struktur lengkap</button>
+  </section>
+
+  <section class="cat">
+    <h2>Daftar syntax dan fungsinya</h2>
+    <p>Tag yang bisa dipakai beserta fungsinya. Kolom terakhir menunjukkan apakah tag punya tag penutup. Tag yang sama juga dijelaskan saat kursor diarahkan ke kode di editor.</p>
+    <div class="tbw"><table class="tb" id="ref"></table></div>
+    <h3>Atribut yang sering dipakai</h3>
+    <div class="tbw"><table class="tb" id="attr"></table></div>
+  </section>
+
+  <section class="cat">
+    <h2>Catatan: kenapa tag harus ditutup</h2>
+
+    <h3>1. Anatomi sebuah elemen</h3>
+    <p>Contoh <code>&lt;p&gt;Halo&lt;/p&gt;</code> terdiri dari tag pembuka <code>&lt;p&gt;</code>, isi <code>Halo</code>, dan tag penutup <code>&lt;/p&gt;</code>. Ketiganya digabung disebut elemen. Tag penutup sama dengan tag pembuka, hanya ditambah garis miring (/).</p>
+
+    <h3>2. Kenapa harus ditutup</h3>
+    <p>Tag pembuka berarti “mulai dari sini jadi paragraf”. Tag penutup berarti “sampai sini saja”. Tanpa penutup, browser harus menebak di mana elemen itu berhenti.</p>
+    <p>HTML itu pemaaf: kalau ada yang kurang, browser memperbaikinya diam-diam dan tidak menampilkan pesan error. Itu enak buat pengunjung, tapi berbahaya buat penulis kode. Kesalahan kecil baru ketahuan setelah tampilan berantakan, dan tebakan browser belum tentu sama dengan maksudmu.</p>
+
+    <h3>3. Kenapa <code>&lt;/p&gt;</code> yang dilupakan masih bisa jalan</h3>
+    <p>Aturan HTML mengizinkan <code>&lt;/p&gt;</code> dihilangkan kalau setelahnya langsung ada elemen seperti p lain, heading, div, ul, ol, atau table, atau kalau induknya sudah berakhir. Browser lalu menutup p itu sendiri.</p>
+<pre class="ex">&lt;p&gt;Paragraf pertama
+&lt;p&gt;Paragraf kedua</pre>
+    <p>Kalau setelahnya bukan salah satu elemen itu, p tidak berhenti dan terus menelan isi sesudahnya. Karena pengecualiannya panjang, kebiasaan terbaik adalah selalu menulis <code>&lt;/p&gt;</code>.</p>
+    <button class="try" data-s="p" type="button">Coba di editor: p tanpa penutup</button>
+
+    <h3>4. Kenapa <code>&lt;h6&gt;</code> harus ditutup dengan <code>&lt;/h6&gt;</code></h3>
+    <p>Berbeda dengan p, tag penutup heading (h1 sampai h6) tidak boleh dihilangkan. Kalau lupa <code>&lt;/h6&gt;</code>, elemen sesudahnya ikut masuk ke dalam h6.</p>
+<pre class="ex">&lt;h6&gt;Judul kecil
+&lt;p&gt;Paragraf ini ikut masuk ke dalam h6&lt;/p&gt;</pre>
+    <p>Hasilnya mungkin masih terlihat “jalan”, tetapi paragraf itu tampil tebal dan kecil mengikuti gaya h6. Pembaca layar dan mesin pencari juga menganggapnya bagian dari judul. Tampilannya tidak error, tetapi strukturnya salah.</p>
+    <button class="try" data-s="h6" type="button">Coba di editor: h6 tanpa penutup</button>
+    <button class="try" data-s="h6ok" type="button">Bandingkan: h6 dengan penutup</button>
+
+    <h3>5. Elemen kosong tidak perlu ditutup</h3>
+    <p>Elemen yang tidak membungkus isi, seperti <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;meta&gt;</code>, dan <code>&lt;link&gt;</code>, memang tidak punya tag penutup. Jangan menulis <code>&lt;/br&gt;</code> atau <code>&lt;/img&gt;</code>.</p>
+    <button class="try" data-s="br" type="button">Coba di editor: br tanpa penutup</button>
+
+    <h3>6. Tutup dari yang paling dalam</h3>
+    <p>Elemen bersarang seperti kotak di dalam kotak: yang dibuka terakhir ditutup pertama.</p>
+<pre class="ex">Benar:  &lt;b&gt;&lt;i&gt;teks&lt;/i&gt;&lt;/b&gt;
+Salah:  &lt;b&gt;&lt;i&gt;teks&lt;/b&gt;&lt;/i&gt;</pre>
+
+    <h3>7. Huruf kecil dan indentasi</h3>
+    <p><code>&lt;P&gt;</code> dan <code>&lt;p&gt;</code> dianggap sama oleh browser, tetapi tulis semuanya dengan huruf kecil. Beri indentasi pada isi elemen supaya pasangan tag pembuka dan penutupnya mudah dicari.</p>
+
+    <h3>8. Cara mengecek</h3>
+    <p>Browser tidak akan memberi tahu kalau ada tag yang lupa ditutup. Untuk memeriksanya, tempelkan kode ke validator HTML milik W3C (validator.w3.org). Di halaman ini, daftar “Perubahan yang dibuat” juga menandai tag yang tidak ditutup.</p>
+
+    <h3>Aturan praktis</h3>
+    <p>Selalu tutup semua tag yang punya isi. Pengecualiannya hanya elemen kosong.</p>
+  </section>
+</main>
+<div id="tip" role="tooltip"></div>
+
+<script>
+var ORIGINAL = '<!DOCTYPE html>\n<html>\n<head>\n<title>Page Title</title>\n</head>\n<body>\n\n<h1>This is a Heading</h1>\n<p>This is a paragraph.</p>\n\n</body>\n</html>';
+var VOID = {br:1,hr:1,img:1,input:1,meta:1,link:1};
+var TAGS = {
+  html:["halaman HTML","Pembungkus seluruh halaman. Semua kode berada di antara html dan penutupnya."],
+  head:["informasi halaman","Bagian informasi tentang halaman. Isinya tidak tampil di layar."],
+  title:["judul tab","Menentukan judul yang muncul di tab browser, bukan di dalam halaman."],
+  body:["isi halaman","Isi halaman yang terlihat pengunjung: teks, gambar, tombol, dan sebagainya."],
+  h1:["judul besar","Heading paling besar dan penting. Ada h1 sampai h6; makin besar angkanya, makin kecil judulnya."],
+  h2:["judul sedang","Heading level 2, lebih kecil dari h1."],
+  h3:["judul kecil","Heading level 3."],
+  h4:["judul lebih kecil","Heading level 4."],
+  h5:["judul sangat kecil","Heading level 5."],
+  h6:["judul terkecil","Heading level 6, yang paling kecil."],
+  p:["paragraf","Paragraf. Browser otomatis memberi jarak di atas dan bawahnya."],
+  br:["pindah baris","Pindah ke baris baru. Tidak punya tag penutup."],
+  hr:["garis pemisah","Garis pemisah horizontal. Tidak punya tag penutup."],
+  b:["teks tebal","Membuat teks di dalamnya tebal."],
+  strong:["teks tebal","Teks penting, tampil tebal."],
+  i:["teks miring","Membuat teks di dalamnya miring."],
+  em:["teks miring","Teks yang ditekankan, tampil miring."],
+  u:["teks bergaris bawah","Memberi garis bawah pada teks."],
+  a:["tautan (link)","Tautan ke halaman lain. Alamatnya ditulis di atribut href."],
+  img:["gambar","Menampilkan gambar. Alamat gambar ada di atribut src."],
+  ul:["daftar berpoin","Daftar dengan poin. Isinya berupa tag li."],
+  ol:["daftar bernomor","Daftar dengan nomor. Isinya berupa tag li."],
+  li:["item daftar","Satu butir di dalam daftar ul atau ol."],
+  button:["tombol","Tombol yang bisa diklik."],
+  div:["kotak pengelompok","Kotak untuk mengelompokkan elemen. Tidak terlihat sendiri."],
+  span:["pembungkus teks","Pembungkus sebaris untuk sebagian teks."],
+  small:["teks kecil","Membuat teks lebih kecil."],
+  mark:["teks tersorot","Menyorot teks seperti stabilo."]
+};
+var src = document.getElementById('src'), hl = document.getElementById('hl'), site = document.getElementById('site');
+var tabTitle = document.getElementById('tabTitle'), fx = document.getElementById('fx'), tip = document.getElementById('tip');
+var tips = [], unclosed = [];
+
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ---------- Lapisan kode berwarna + penjelasan ---------- */
+function highlight(code){
+  tips = []; var stack = [], out = '', unc = [];
+  var re = /<!--[\s\S]*?-->|<![^>]*>|<\/?[a-zA-Z][^<>]*>?|[^<]+|</g, m;
+  while((m = re.exec(code))){
+    var tk = m[0], cls = 't', tp = null, nm;
+    if(tk.indexOf('<!--') === 0){ cls += ' d'; tp = ['Komentar','Catatan untuk manusia. Browser tidak menampilkannya di Website.']; }
+    else if(/^<!doctype/i.test(tk)){ cls += ' d'; tp = ['<!DOCTYPE html>','Memberi tahu browser bahwa ini dokumen HTML5. Selalu ditulis paling atas.']; }
+    else if(/^<\//.test(tk)){
+      nm = (tk.match(/^<\/([a-zA-Z0-9]+)/) || [])[1]; nm = nm ? nm.toLowerCase() : '';
+      var ix = stack.lastIndexOf(nm); if(ix > -1){ unc = unc.concat(stack.slice(ix + 1)); stack.length = ix; }
+      tp = ['Tag penutup', 'Menandai berakhirnya tag <' + nm + '>. Tag penutup diawali garis miring (/).'];
+    }
+    else if(/^<[a-zA-Z]/.test(tk)){
+      nm = tk.match(/^<([a-zA-Z0-9]+)/)[1].toLowerCase();
+      var info = TAGS[nm];
+      tp = ['<' + nm + '>', info ? info[1] : 'Tag ini belum ada di daftar belajar. Browser akan menampilkannya apa adanya atau mengabaikannya.'];
+      if(/\s[a-zA-Z-]+\s*=/.test(tk)) tp[1] += ' Tulisan seperti nama="nilai" di dalam tag disebut atribut: pengaturan tambahan.';
+      if(!VOID[nm] && !/\/>$/.test(tk)) stack.push(nm);
+    }
+    else if(tk !== '<' && tk.trim()){
+      cls += ' x'; var par = stack[stack.length - 1] || '';
+      if(par === 'title') tp = ['Teks judul tab','Teks ini muncul di tab browser. Ubah, dan nama tab di Website ikut berubah.'];
+      else if(/^h[1-6]$/.test(par)) tp = ['Teks judul','Teks ini tampil sebagai judul di halaman.'];
+      else if(par === 'p') tp = ['Teks paragraf','Teks ini tampil sebagai paragraf di halaman.'];
+      else tp = ['Teks', par ? 'Teks di dalam tag ' + par + '. Ini yang dibaca pengunjung.' : 'Teks di luar tag apa pun. Browser tetap menampilkannya di halaman.'];
+    }
+    if(tp){ tips.push(tp); out += '<span class="' + cls + '" data-i="' + (tips.length - 1) + '">' + esc(tk) + '</span>'; }
+    else out += esc(tk);
+  }
+  unclosed = unc.concat(stack).filter(function(n){ return !/^(html|head|body)$/.test(n); });
+  hl.innerHTML = out + '\n';
+}
+
+/* ---------- Tooltip ---------- */
+var cur = null;
+function hideTip(){ tip.classList.remove('show'); if(cur){ cur.classList.remove('on'); cur = null; } }
+function showTip(el, x, y){
+  if(cur !== el){ if(cur) cur.classList.remove('on'); el.classList.add('on'); cur = el; }
+  var t = tips[+el.getAttribute('data-i')]; if(!t) return;
+  tip.innerHTML = ''; var b = document.createElement('b'); b.textContent = t[0];
+  tip.appendChild(b); tip.appendChild(document.createTextNode(t[1])); tip.classList.add('show');
+  var w = tip.offsetWidth, h = tip.offsetHeight;
+  var left = Math.min(Math.max(8, x + 14), window.innerWidth - w - 8);
+  var top = y + 20; if(top + h > window.innerHeight - 8) top = y - h - 14;
+  tip.style.left = left + 'px'; tip.style.top = top + 'px';
+}
+function hit(e){
+  src.style.pointerEvents = 'none';
+  var el = document.elementFromPoint(e.clientX, e.clientY);
+  src.style.pointerEvents = '';
+  return el && el.closest ? el.closest('.t') : null;
+}
+function probe(e){ var el = hit(e); if(el) showTip(el, e.clientX, e.clientY); else hideTip(); }
+src.addEventListener('mousemove', probe);
+src.addEventListener('click', probe);
+src.addEventListener('mouseleave', hideTip);
+src.addEventListener('blur', hideTip);
+src.addEventListener('scroll', function(){ hl.scrollTop = src.scrollTop; hl.scrollLeft = src.scrollLeft; hideTip(); });
+
+/* ---------- Preview (HTML saja) ---------- */
+function clean(code){
+  var d = new DOMParser().parseFromString(code, 'text/html');
+  d.querySelectorAll('script,style,link,iframe,object,embed,meta[http-equiv]').forEach(function(e){ e.remove(); });
+  d.querySelectorAll('*').forEach(function(e){
+    [].slice.call(e.attributes).forEach(function(a){ if(a.name === 'style' || a.name.indexOf('on') === 0) e.removeAttribute(a.name); });
+  });
+  return (/^\s*<!doctype/i.test(code) ? '<!DOCTYPE html>' : '') + d.documentElement.outerHTML;
+}
+
+/* ---------- Pengaruh perubahan ---------- */
+function ownText(el){
+  return [].slice.call(el.childNodes).filter(function(n){return n.nodeType === 3;}).map(function(n){return n.textContent;}).join('').replace(/\s+/g,' ').trim();
+}
+function attrs(el){ return [].slice.call(el.attributes).map(function(a){return a.name + '=' + a.value;}).sort().join(' '); }
+function groupByTag(d){
+  var m = {}; d.body.querySelectorAll('*').forEach(function(e){ var t = e.tagName.toLowerCase(); (m[t] = m[t] || []).push(e); }); return m;
+}
+function short(s){ return s.length > 40 ? s.slice(0,40) + '…' : s; }
+var OPT = {p:1,li:1,dt:1,dd:1,tr:1,td:1,th:1,option:1};
+function unclosedFx(){
+  var c = {}, o = [];
+  unclosed.forEach(function(n){ c[n] = (c[n] || 0) + 1; });
+  Object.keys(c).forEach(function(n){
+    var t = '<code>&lt;' + n + '&gt;</code>' + (c[n] > 1 ? ' (' + c[n] + 'x)' : ''), h;
+    if(/^h[1-6]$/.test(n)) h = t + ' tidak ditutup. Heading wajib ditutup: isi sesudahnya ikut masuk ke dalam <code>&lt;' + n + '&gt;</code>, jadi tampil sebagai bagian judul.';
+    else if(OPT[n]) h = t + ' tidak ditutup. Aturan HTML mengizinkan, jadi browser menutupnya sendiri dan tampil normal. Tetap lebih aman ditutup.';
+    else h = t + ' tidak ditutup. Browser menutupnya sendiri dengan menebak, hasilnya bisa tidak sesuai harapan.';
+    o.push({k:'warn', l:'Peringatan', h:h});
+  });
+  return o;
+}
+function analyse(code){
+  var out = unclosedFx();
+  if(!code.trim()) return [{k:'del', l:'Hapus', h:'Kode kosong, jadi Website juga kosong.'}];
+  var a = new DOMParser().parseFromString(ORIGINAL, 'text/html'), b = new DOMParser().parseFromString(code, 'text/html');
+  var hadDt = /^\s*<!doctype/i.test(ORIGINAL), hasDt = /^\s*<!doctype/i.test(code);
+  if(hadDt && !hasDt) out.push({k:'chg', l:'Ubah', h:'<code>&lt;!DOCTYPE html&gt;</code> dihapus. Browser masuk mode lama (quirks mode), jadi tampilan bisa sedikit berbeda.'});
+  if(!hadDt && hasDt) out.push({k:'add', l:'Tambah', h:'<code>&lt;!DOCTYPE html&gt;</code> ditambahkan, browser memakai standar HTML terbaru.'});
+  if(a.title !== b.title){
+    if(b.title) out.push({k:'chg', l:'Ubah', h:'Judul tab browser berubah menjadi <b></b>.', t:b.title});
+    else out.push({k:'del', l:'Hapus', h:'Judul tab hilang, browser menampilkan nama file atau alamat halaman.'});
+  }
+  var ga = groupByTag(a), gb = groupByTag(b), all = {};
+  Object.keys(ga).concat(Object.keys(gb)).forEach(function(t){ all[t] = 1; });
+  Object.keys(all).forEach(function(t){
+    var x = ga[t] || [], y = gb[t] || [], desc = TAGS[t] ? ' (' + TAGS[t][0] + ')' : '';
+    if(y.length > x.length) out.push({k:'add', l:'Tambah', h:'Menambah ' + (y.length - x.length) + ' tag <code>&lt;' + t + '&gt;</code>' + desc + '. Elemen baru muncul di Website.'});
+    else if(y.length < x.length) out.push({k:'del', l:'Hapus', h:'Menghapus ' + (x.length - y.length) + ' tag <code>&lt;' + t + '&gt;</code>' + desc + '. Bagian itu hilang dari Website.'});
+    for(var i = 0; i < Math.min(x.length, y.length); i++){
+      var tx = ownText(x[i]), ty = ownText(y[i]), n = Math.min(x.length, y.length) > 1 ? ' ke-' + (i+1) : '';
+      if(tx !== ty) out.push({k:'chg', l:'Ubah', h:'Teks di <code>&lt;' + t + '&gt;</code>' + n + ' berubah dari <b></b> menjadi <b></b>.', t:short(tx) || '(kosong)', t2:short(ty) || '(kosong)'});
+      if(attrs(x[i]) !== attrs(y[i])) out.push({k:'chg', l:'Ubah', h:'Atribut pada <code>&lt;' + t + '&gt;</code>' + n + ' berubah, misalnya alamat tautan atau sumber gambar.'});
+    }
+  });
+  if(/<(script|style)/i.test(code)) out.push({k:'none', l:'Info', h:'<code>&lt;script&gt;</code> atau <code>&lt;style&gt;</code> tidak dijalankan karena di sini hanya HTML.'});
+  if(!out.length) out.push({k:'none', l:'Sama', h:'Belum ada perubahan. Coba ganti teks di dalam <code>&lt;h1&gt;</code> atau tambahkan <code>&lt;h2&gt;Judul kecil&lt;/h2&gt;</code>.'});
+  return out;
+}
+
+function render(){
+  var code = src.value;
+  highlight(code);
+  hl.scrollTop = src.scrollTop; hl.scrollLeft = src.scrollLeft;
+  site.srcdoc = clean(code);
+  tabTitle.textContent = new DOMParser().parseFromString(code, 'text/html').title || 'Tanpa judul';
+  fx.innerHTML = '';
+  analyse(code).forEach(function(f){
+    var li = document.createElement('li'); li.className = 'k-' + f.k;
+    var bd = document.createElement('span'); bd.className = 'badge'; bd.textContent = f.l;
+    var tx = document.createElement('span'); tx.innerHTML = f.h;
+    var bs = tx.querySelectorAll('b');
+    if(bs[0] && f.t !== undefined) bs[0].textContent = '“' + f.t + '”';
+    if(bs[1] && f.t2 !== undefined) bs[1].textContent = '“' + f.t2 + '”';
+    li.appendChild(bd); li.appendChild(tx); fx.appendChild(li);
+  });
+}
+src.addEventListener('input', function(){ hideTip(); render(); });
+src.addEventListener('keydown', function(e){
+  if(e.key === 'Tab'){
+    e.preventDefault(); var s = src.selectionStart;
+    src.value = src.value.slice(0, s) + '  ' + src.value.slice(src.selectionEnd);
+    src.selectionStart = src.selectionEnd = s + 2; render();
+  }
+});
+document.getElementById('reset').addEventListener('click', function(){ src.value = ORIGINAL; render(); });
+['area','base','col','embed','source','track','wbr'].forEach(function(n){ VOID[n] = 1; });
+var REF = [
+  ['Struktur halaman', [
+    ['html','pembungkus seluruh halaman'],['head','informasi halaman, tidak tampil di layar'],['title','judul di tab browser'],
+    ['body','isi halaman yang terlihat'],['meta','informasi tambahan, misalnya set karakter'],['link','menghubungkan file luar, misalnya CSS'],
+    ['style','menulis CSS di dalam halaman'],['script','menulis atau memuat JavaScript'],['base','alamat dasar untuk semua tautan']]],
+  ['Judul dan teks', [
+    ['h1-h6','judul; h1 paling besar sampai h6 paling kecil'],['p','paragraf'],['br','pindah baris'],['hr','garis pemisah'],
+    ['pre','teks apa adanya, spasi dan enter dipertahankan'],['blockquote','kutipan panjang'],['q','kutipan pendek'],['address','informasi kontak']]],
+  ['Format teks', [
+    ['b','teks tebal'],['strong','teks penting, tampil tebal'],['i','teks miring'],['em','teks ditekankan, tampil miring'],
+    ['u','teks bergaris bawah'],['s','teks dicoret'],['small','teks lebih kecil'],['mark','teks disorot seperti stabilo'],
+    ['sub','teks turun (subscript)'],['sup','teks naik (superscript)'],['del','teks yang dihapus'],['ins','teks yang ditambahkan'],
+    ['code','potongan kode'],['kbd','tombol keyboard'],['abbr','singkatan'],['cite','judul sebuah karya']]],
+  ['Tautan dan media', [
+    ['a','tautan ke halaman lain'],['img','gambar'],['audio','pemutar suara'],['video','pemutar video'],
+    ['source','sumber file untuk audio atau video'],['iframe','halaman di dalam halaman'],['canvas','area gambar untuk JavaScript'],['svg','gambar vektor']]],
+  ['Daftar', [
+    ['ul','daftar berpoin'],['ol','daftar bernomor'],['li','satu butir dalam daftar'],
+    ['dl','daftar istilah'],['dt','istilah'],['dd','penjelasan istilah']]],
+  ['Tabel', [
+    ['table','tabel'],['caption','judul tabel'],['thead','bagian kepala tabel'],['tbody','bagian isi tabel'],
+    ['tfoot','bagian kaki tabel'],['tr','satu baris tabel'],['th','sel judul kolom'],['td','sel isi']]],
+  ['Formulir', [
+    ['form','formulir'],['input','kolom isian'],['label','label untuk isian'],['textarea','isian banyak baris'],
+    ['select','menu pilihan'],['option','satu pilihan di menu'],['button','tombol'],['fieldset','kelompok isian'],['legend','judul kelompok isian']]],
+  ['Pengelompok dan semantik', [
+    ['div','kotak pengelompok'],['span','pembungkus sebagian teks'],['header','kepala halaman atau bagian'],['nav','menu navigasi'],
+    ['main','isi utama halaman'],['section','satu bagian isi'],['article','tulisan yang berdiri sendiri'],['aside','isi sampingan'],
+    ['footer','kaki halaman atau bagian'],['figure','gambar beserta keterangannya'],['figcaption','keterangan gambar']]]
+];
+var ATTR = [
+  ['href','alamat tujuan tautan, dipakai di a'],['src','alamat file gambar, audio, atau video'],['alt','teks pengganti kalau gambar gagal tampil'],
+  ['id','nama unik untuk satu elemen'],['class','nama kelompok yang bisa dipakai banyak elemen'],['style','mengatur tampilan langsung di elemen'],
+  ['title','teks bantuan saat kursor diarahkan'],['lang','bahasa isi halaman atau elemen'],['width','lebar elemen, misalnya gambar'],
+  ['height','tinggi elemen'],['target','tempat membuka tautan, misalnya _blank untuk tab baru'],['type','jenis isian pada input atau jenis tombol'],
+  ['name','nama isian pada formulir'],['value','nilai awal atau nilai kiriman'],['placeholder','teks petunjuk di dalam kolom isian'],
+  ['disabled','menonaktifkan elemen'],['required','isian wajib diisi'],['charset','set karakter, dipakai di meta']
+];
+(function(){
+  var h = '<thead><tr><th>Syntax</th><th>Fungsi</th><th>Tag penutup</th></tr></thead><tbody>';
+  REF.forEach(function(g){
+    h += '<tr class="grp"><td colspan="3">' + g[0] + '</td></tr>';
+    g[1].forEach(function(r){
+      var n = r[0], lb = n === 'h1-h6' ? '&lt;h1&gt; sampai &lt;h6&gt;' : '&lt;' + n + '&gt;';
+      if(n !== 'h1-h6' && !TAGS[n]) TAGS[n] = [r[1], r[1]];
+      h += '<tr><td><code>' + lb + '</code></td><td>' + r[1] + '</td><td>' + (VOID[n] ? 'tidak ada' : 'ada') + '</td></tr>';
+    });
+  });
+  document.getElementById('ref').innerHTML = h + '</tbody>';
+  var s = '<thead><tr><th>Atribut</th><th>Fungsi</th></tr></thead><tbody>';
+  ATTR.forEach(function(r){ s += '<tr><td><code>' + r[0] + '</code></td><td>' + r[1] + '</td></tr>'; });
+  document.getElementById('attr').innerHTML = s + '</tbody>';
+})();
+var SNIP = {
+  full: ['<!DOCTYPE html>','<html lang="id">','<head>','  <meta charset="UTF-8">','  <title>Judul halaman</title>','</head>','<body>','  <h1>Judul</h1>','  <p>Paragraf.</p>','</body>','</html>'].join('\n'),
+  p: ORIGINAL.replace('<p>This is a paragraph.</p>', '<p>Paragraf pertama\n<p>Paragraf kedua'),
+  h6: ORIGINAL.replace('<h1>This is a Heading</h1>', '<h6>This is a Heading'),
+  h6ok: ORIGINAL.replace('<h1>This is a Heading</h1>', '<h6>This is a Heading</h6>'),
+  br: ORIGINAL.replace('<p>This is a paragraph.</p>', '<p>Baris satu<br>Baris dua</p>')
+};
+document.querySelectorAll('.try').forEach(function(b){
+  b.addEventListener('click', function(){
+    src.value = SNIP[b.getAttribute('data-s')]; render();
+    document.getElementById('kode').scrollIntoView({behavior:'smooth'});
+  });
+});
+src.value = ORIGINAL; render();
+</script>
+</body>
+</html>
