@@ -1,4 +1,4 @@
-# Catatan HTML Kuroneko - Bagian 1: Home dan Syntax
+# Catatan HTML Kuroneko - Bagian 1: Syntax
 
 Mulai belajar: 14 Maret 2019
 Catatan ditulis: 16 Maret 2019
