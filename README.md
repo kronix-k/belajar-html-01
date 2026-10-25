@@ -5,6 +5,10 @@ Catatan ditulis: 16 Maret 2019
 
 Lihat langsung: [https://kronix-k.github.io/belajar-html-01-home/](https://kronix-k.github.io/belajar-html-01/)
 
-<p>Repo ini dibuat untuk nostalgia pertama kali aku belajar web dev</p>
-<p>aku nga tau disimpan dimana</p> 
-<p>jadi aku simpan disini aja</p> 
+<p>Repo ini dibuat karena aku nga sengaja menemukan buku tulis yang aku pakai buat belajar web dev</p>
+<p>Repo ini buat nostagia aja buat menyimpan kenangan waktu pertama kali aku masih belajar web dev pas masih sma</p>
+
+
+
+
+
