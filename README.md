@@ -3,7 +3,7 @@
 Mulai belajar: 14 Maret 2019
 Catatan ditulis: 16 Maret 2019
 
-Lihat langsung: https://kronix-k.github.io/belajar-html-01-home/
+Lihat langsung: [https://kronix-k.github.io/belajar-html-01-home/](https://kronix-k.github.io/belajar-html-01/)
 
 Catatan belajar HTML waktu masih pemula, mengikuti urutan W3Schools.
 
